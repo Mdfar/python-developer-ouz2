@@ -1,0 +1,5 @@
+version: '3.12' services: api: build: . ports: - "8000:8000" environment: - KAFKA_URL=kafka:9092 - DB_URL=postgresql://kaarvi:admin@db:5432/platform depends_on: - kafka - db
+
+kafka: image: confluentinc/cp-kafka:latest environment: KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181 KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092 ports: - "9092:9092"
+
+db: image: postgres:15 environment: POSTGRES_USER: kaarvi POSTGRES_DB: platform POSTGRES_PASSWORD: admin
